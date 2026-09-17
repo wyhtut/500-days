@@ -1,0 +1,2403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<title>ARCHIVE 500 — WAI YAN × JESSI</title>
+<meta name="description" content="A digital archive of 500 days.">
+
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='14' fill='%230c0e0c'/%3E%3Crect x='28' y='28' width='44' height='44' rx='3' fill='none' stroke='%237c9a7e' stroke-width='6'/%3E%3C/svg%3E">
+
+<meta property="og:title" content="ARCHIVE 500 — WAI YAN × JESSI">
+<meta property="og:description" content="500 days, archived.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --bg: #0c0e0c;
+  --bg-raised: #131612;
+  --bg-card: #151814;
+  --border: #2a2e27;
+  --border-soft: #1e211c;
+  --text: #ece7db;
+  --text-dim: #9a9689;
+  --text-faint: #63615a;
+  --accent: #7c9a7e;       --accent-dim: #4d5f4e;
+  --accent-glow: rgba(124, 154, 126, 0.18);
+
+  --font-display: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
+  --font-body: 'Cormorant Garamond', Georgia, serif;
+  --font-mono: 'JetBrains Mono', 'Courier New', monospace;
+
+  --max-width: 640px;
+  --radius: 2px;
+  --grain-opacity: 0.05;
+
+  --safe-top: env(safe-area-inset-top, 0px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 18px;
+  line-height: 1.6;
+  overflow-x: hidden;
+  width: 100%;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  padding-top: var(--safe-top);
+  padding-bottom: var(--safe-bottom);
+  touch-action: pan-y;
+}
+
+img { max-width: 100%; display: block; }
+button { font-family: inherit; cursor: pointer; }
+input, textarea { font-family: inherit; }
+a { color: inherit; }
+
+.grain {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: var(--grain-opacity);
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+.section {
+  width: 100%;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 96px 24px;
+  position: relative;
+}
+
+.section--tight { padding-top: 48px; padding-bottom: 48px; }
+
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  color: var(--accent);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.eyebrow::before {
+  content: '';
+  width: 14px;
+  height: 1px;
+  background: var(--accent-dim);
+  display: inline-block;
+}
+
+.section-title {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: clamp(28px, 7vw, 40px);
+  line-height: 1.15;
+  color: var(--text);
+  margin-bottom: 20px;
+}
+
+.section-body {
+  color: var(--text-dim);
+  font-size: 19px;
+  line-height: 1.65;
+  max-width: 54ch;
+}
+
+.divider {
+  width: 100%;
+  height: 1px;
+  background: var(--border);
+  margin: 40px 0;
+}
+
+.editable {
+  color: var(--accent);
+  font-style: italic;
+  border-bottom: 1px dashed var(--accent-dim);
+  cursor: text;
+}
+
+a:focus-visible,
+button:focus-visible,
+[tabindex]:focus-visible {
+  outline: 1px solid var(--accent);
+  outline-offset: 3px;
+}
+
+.skip-link {
+  position: fixed;
+  top: -60px;
+  left: 12px;
+  z-index: 1000;
+  background: var(--accent);
+  color: var(--bg);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  padding: 10px 16px;
+  border-radius: var(--radius);
+  transition: top 0.2s ease;
+}
+
+.skip-link:focus {
+  top: calc(12px + var(--safe-top));
+}
+
+#back-to-top {
+  position: fixed;
+  bottom: calc(20px + var(--safe-bottom));
+  left: 20px;
+  z-index: 400;
+  height: 40px;
+  padding: 0 16px;
+  border-radius: 20px;
+  background: var(--bg-raised);
+  border: 1px solid var(--border);
+  color: var(--text-dim);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  opacity: 0;
+  transform: translateY(8px);
+  pointer-events: none;
+  transition: opacity 0.3s ease, transform 0.3s ease, border-color 0.25s ease;
+}
+
+#back-to-top.visible {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+#back-to-top:hover { border-color: var(--accent-dim); color: var(--accent); }
+#back-to-top:active { transform: scale(0.96); }
+
+#progress-bar {
+  position: fixed;
+  top: var(--safe-top);
+  left: 0;
+  height: 2px;
+  width: 0%;
+  background: var(--accent);
+  z-index: 500;
+  transition: width 0.15s linear;
+  box-shadow: 0 0 8px var(--accent-glow);
+}
+
+#music-toggle {
+  position: fixed;
+  bottom: calc(20px + var(--safe-bottom));
+  right: 20px;
+  z-index: 400;
+  height: 40px;
+  padding: 0 16px;
+  border-radius: 20px;
+  background: var(--bg-raised);
+  border: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  color: var(--text-dim);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  transition: border-color 0.25s ease, color 0.25s ease, background 0.25s ease;
+  white-space: nowrap;
+}
+
+#music-toggle:active { transform: scale(0.96); }
+#music-toggle:hover { border-color: var(--accent-dim); }
+#music-toggle.playing { color: var(--accent); border-color: var(--accent-dim); background: var(--accent-glow); }
+
+#music-toggle .music-note {
+  font-size: 13px;
+  line-height: 1;
+}
+
+#music-toggle .music-state {
+  font-weight: 500;
+}
+
+#music-toggle svg { width: 18px; height: 18px; }
+
+.music-bars { display: flex; align-items: flex-end; gap: 2px; height: 14px; }
+.music-bars span {
+  width: 2px;
+  background: currentColor;
+  display: block;
+  height: 4px;
+  border-radius: 1px;
+}
+#music-toggle.playing .music-bars span {
+  animation: barbounce 900ms ease-in-out infinite;
+}
+#music-toggle.playing .music-bars span:nth-child(2) { animation-delay: 120ms; }
+#music-toggle.playing .music-bars span:nth-child(3) { animation-delay: 240ms; }
+
+@keyframes barbounce {
+  0%, 100% { height: 4px; }
+  50% { height: 13px; }
+}
+
+.archive-stats {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 28px 24px 0;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  color: var(--text-faint);
+  text-align: center;
+}
+
+#intro {
+  min-height: 100svh;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 24px;
+  position: relative;
+}
+
+.intro-status {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  color: var(--text-faint);
+  margin-bottom: 32px;
+  opacity: 0;
+  animation: fadeIn 1s ease forwards;
+  animation-delay: 0.2s;
+}
+
+.intro-title {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  letter-spacing: 0.3em;
+  color: var(--accent);
+  margin-bottom: 18px;
+  opacity: 0;
+  animation: fadeIn 1s ease forwards;
+  animation-delay: 0.5s;
+}
+
+.intro-names {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: clamp(38px, 11vw, 62px);
+  letter-spacing: 0.01em;
+  line-height: 1.1;
+  margin-bottom: 14px;
+  opacity: 0;
+  animation: fadeIn 1.1s ease forwards;
+  animation-delay: 0.9s;
+}
+
+.intro-range {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--text-dim);
+  letter-spacing: 0.1em;
+  margin-bottom: 46px;
+  opacity: 0;
+  animation: fadeIn 1s ease forwards;
+  animation-delay: 1.3s;
+}
+
+.intro-line2 {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  color: var(--text-faint);
+  margin-bottom: 44px;
+  min-height: 16px;
+  opacity: 0;
+  animation: fadeIn 1s ease forwards;
+  animation-delay: 1.7s;
+}
+
+.cursor {
+  display: inline-block;
+  width: 8px;
+  height: 14px;
+  background: var(--accent);
+  margin-left: 2px;
+  vertical-align: -2px;
+  animation: blink 1s step-end infinite;
+}
+
+@keyframes blink { 50% { opacity: 0; } }
+@keyframes fadeIn { to { opacity: 1; } }
+
+.btn-open {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  letter-spacing: 0.15em;
+  color: var(--bg);
+  background: var(--accent);
+  border: none;
+  padding: 16px 36px;
+  border-radius: var(--radius);
+  opacity: 0;
+  animation: fadeIn 1s ease forwards;
+  animation-delay: 2.1s;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  min-height: 48px;
+}
+
+.btn-open:active { transform: scale(0.97); }
+.btn-open:hover { box-shadow: 0 0 24px var(--accent-glow); }
+
+.intro-scroll-hint {
+  position: absolute;
+  bottom: calc(28px + var(--safe-bottom));
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  color: var(--text-faint);
+  opacity: 0;
+  animation: fadeIn 1s ease forwards, driftDown 2.4s ease-in-out infinite;
+  animation-delay: 2.6s, 2.6s;
+}
+
+@keyframes driftDown {
+  0%, 100% { transform: translateY(0); opacity: 0.5; }
+  50% { transform: translateY(6px); opacity: 1; }
+}
+
+#archive {
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+#archive.revealed { opacity: 1; transform: translateY(0); }
+
+.reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.reveal.is-visible { opacity: 1; transform: translateY(0); }
+
+.file-label {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--text-faint);
+  letter-spacing: 0.1em;
+  margin-bottom: 6px;
+}
+
+.radio-wrap {
+  margin-top: 36px;
+}
+
+.radio-unit {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.radio-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 16px;
+  border-bottom: 1px solid var(--border);
+  background: var(--bg-raised);
+}
+
+.radio-brand {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  color: var(--text-faint);
+}
+
+.radio-status-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--accent-dim);
+  transition: background 0.3s ease, box-shadow 0.3s ease;
+}
+
+.radio-status-dot.live {
+  background: var(--accent);
+  box-shadow: 0 0 8px var(--accent-glow);
+  animation: dotBlink 1.4s ease-in-out infinite;
+}
+
+@keyframes dotBlink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+.radio-display {
+  padding: 20px 16px 16px;
+  border-bottom: 1px solid var(--border-soft);
+}
+
+.radio-freq-row {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  margin-bottom: 10px;
+}
+
+.radio-freq-num {
+  font-family: var(--font-mono);
+  font-size: clamp(28px, 8vw, 40px);
+  color: var(--accent);
+  letter-spacing: 0.04em;
+  line-height: 1;
+  transition: color 0.2s ease;
+  min-width: 6ch;
+}
+
+.radio-freq-unit {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--text-faint);
+  letter-spacing: 0.1em;
+}
+
+.radio-wave {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  height: 24px;
+}
+
+.radio-wave-bar {
+  width: 2px;
+  border-radius: 1px;
+  background: var(--accent-dim);
+  transition: height 0.15s ease, background 0.2s ease;
+  flex-shrink: 0;
+}
+
+.radio-wrap.tuned .radio-wave-bar {
+  background: var(--accent);
+  animation: waveAnim 0.6s ease-in-out infinite alternate;
+}
+
+.radio-wave-bar:nth-child(1)  { height: 4px;  animation-delay: 0ms; }
+.radio-wave-bar:nth-child(2)  { height: 10px; animation-delay: 60ms; }
+.radio-wave-bar:nth-child(3)  { height: 16px; animation-delay: 120ms; }
+.radio-wave-bar:nth-child(4)  { height: 8px;  animation-delay: 180ms; }
+.radio-wave-bar:nth-child(5)  { height: 20px; animation-delay: 240ms; }
+.radio-wave-bar:nth-child(6)  { height: 12px; animation-delay: 300ms; }
+.radio-wave-bar:nth-child(7)  { height: 18px; animation-delay: 360ms; }
+.radio-wave-bar:nth-child(8)  { height: 6px;  animation-delay: 420ms; }
+.radio-wave-bar:nth-child(9)  { height: 14px; animation-delay: 480ms; }
+.radio-wave-bar:nth-child(10) { height: 9px;  animation-delay: 540ms; }
+.radio-wave-bar:nth-child(11) { height: 22px; animation-delay: 600ms; }
+.radio-wave-bar:nth-child(12) { height: 5px;  animation-delay: 660ms; }
+.radio-wave-bar:nth-child(13) { height: 17px; animation-delay: 720ms; }
+.radio-wave-bar:nth-child(14) { height: 11px; animation-delay: 780ms; }
+.radio-wave-bar:nth-child(15) { height: 7px;  animation-delay: 840ms; }
+
+@keyframes waveAnim {
+  from { transform: scaleY(0.4); }
+  to   { transform: scaleY(1.0); }
+}
+
+.radio-dial-wrap {
+  padding: 18px 16px;
+  border-bottom: 1px solid var(--border-soft);
+}
+
+.radio-dial-label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  color: var(--text-faint);
+  margin-bottom: 10px;
+}
+
+.radio-dial {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 3px;
+  background: var(--border);
+  border-radius: 2px;
+  outline: none;
+  cursor: pointer;
+  position: relative;
+}
+
+.radio-dial::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--accent);
+  border: 2px solid var(--bg);
+  box-shadow: 0 0 10px var(--accent-glow);
+  cursor: grab;
+  transition: box-shadow 0.2s ease;
+}
+
+.radio-dial:active::-webkit-slider-thumb { cursor: grabbing; box-shadow: 0 0 18px var(--accent-glow); }
+.radio-dial::-moz-range-thumb {
+  width: 18px; height: 18px;
+  border-radius: 50%;
+  background: var(--accent);
+  border: 2px solid var(--bg);
+  box-shadow: 0 0 10px var(--accent-glow);
+  cursor: grab;
+}
+
+.radio-ticks {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 6px;
+}
+
+.radio-tick {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  color: var(--text-faint);
+  letter-spacing: 0.04em;
+  opacity: 0.5;
+  transition: color 0.2s ease, opacity 0.2s ease;
+}
+
+.radio-tick.active { color: var(--accent); opacity: 1; }
+
+.radio-screen {
+  padding: 20px 18px 22px;
+  min-height: 100px;
+  position: relative;
+}
+
+.radio-screen-label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  color: var(--text-faint);
+  margin-bottom: 12px;
+}
+
+.radio-signal-text {
+  font-family: var(--font-body);
+  font-size: 19px;
+  font-style: italic;
+  color: var(--text-dim);
+  line-height: 1.65;
+  min-height: 60px;
+  transition: opacity 0.25s ease;
+}
+
+.radio-signal-text.static {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-style: normal;
+  color: var(--text-faint);
+  letter-spacing: 0.06em;
+}
+
+.radio-signal-text.lock {
+  color: var(--text);
+  font-style: italic;
+}
+
+.radio-scan-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 16px 18px;
+  padding: 11px 18px;
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  color: var(--text-dim);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  cursor: pointer;
+  transition: border-color 0.2s ease, color 0.2s ease, background 0.2s ease;
+  width: calc(100% - 32px);
+  justify-content: center;
+}
+
+.radio-scan-btn:hover { border-color: var(--accent-dim); color: var(--accent); }
+.radio-scan-btn.scanning { border-color: var(--accent); color: var(--accent); background: var(--accent-glow); }
+.radio-scan-btn:active { transform: scale(0.98); }
+
+.gap-wrap {
+  margin-top: 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.gap-track {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  max-width: 360px;
+}
+
+.gap-node {
+  flex: 0 0 auto;
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 4px;
+  transition: box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.gap-node.pulse {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 5px var(--accent-glow);
+}
+
+.gap-node-label {
+  font-family: var(--font-mono);
+  font-size: 8.5px;
+  letter-spacing: 0.05em;
+  color: var(--text-dim);
+  line-height: 1.2;
+}
+
+.gap-path {
+  position: relative;
+  flex: 1 1 auto;
+  height: 2px;
+}
+
+.gap-path-line {
+  position: absolute;
+  inset: 0;
+  border-top: 2px dashed var(--border);
+}
+
+.gap-traveler {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translate(-50%, -50%);
+  font-size: 15px;
+  line-height: 1;
+  color: var(--accent);
+  filter: drop-shadow(0 0 4px var(--accent-glow));
+  transition: left 1.3s cubic-bezier(0.32, 0.85, 0.24, 1);
+}
+
+.gap-traveler.sent { left: 100%; }
+
+.gap-send-btn {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  padding: 12px 24px;
+  background: var(--bg-card);
+  border: 1px solid var(--accent);
+  color: var(--accent);
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.gap-send-btn:hover:not(:disabled) { background: var(--accent); color: var(--bg); }
+.gap-send-btn:disabled { opacity: 0.55; cursor: default; }
+
+.gap-result {
+  font-family: var(--font-body);
+  font-style: italic;
+  font-size: 15px;
+  color: var(--text-dim);
+  text-align: center;
+  min-height: 22px;
+  max-width: 300px;
+}
+
+.gap-result.show { animation: gapPop 0.4s ease; }
+
+@keyframes gapPop {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: none; }
+}
+
+.still-here-wrap {
+  margin-top: 44px;
+}
+
+.still-here-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.observation {
+  padding: 28px 0;
+  border-bottom: 1px solid var(--border-soft);
+  position: relative;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.observation.in-view {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.observation:first-child { padding-top: 0; }
+.observation:last-child  { border-bottom: none; }
+
+.obs-index {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  color: var(--accent);
+  margin-bottom: 14px;
+  opacity: 0.7;
+}
+
+.obs-text {
+  font-family: var(--font-body);
+  font-size: clamp(20px, 5vw, 26px);
+  line-height: 1.6;
+  color: var(--text-dim);
+  font-style: italic;
+  font-weight: 400;
+  max-width: 34ch;
+}
+
+.obs-text em {
+  font-style: normal;
+  color: var(--text);
+}
+
+.observation.obs-final .obs-text {
+  font-size: clamp(21px, 5.5vw, 27px);
+  color: var(--text);
+}
+
+.multiverse-wrap {
+  margin-top: 44px;
+}
+
+.multiverse-preamble {
+  font-family: var(--font-body);
+  font-size: 19px;
+  font-style: italic;
+  color: var(--text-dim);
+  line-height: 1.75;
+  max-width: 50ch;
+  border-left: 2px solid var(--accent-dim);
+  padding-left: 20px;
+  margin-bottom: 44px;
+}
+
+.multiverse-orbs {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+  margin-bottom: 14px;
+}
+
+@media (max-width: 400px) {
+  .multiverse-orbs { grid-template-columns: repeat(2, 1fr); }
+}
+
+.universe-orb {
+  aspect-ratio: 1;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background: var(--bg-card);
+  cursor: pointer;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: border-color 0.3s ease, transform 0.2s ease;
+  overflow: hidden;
+  padding: 0;
+}
+
+.universe-orb::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, var(--orb-color, var(--accent-glow)), transparent 70%);
+  opacity: 0.45;
+  transition: opacity 0.35s ease;
+}
+
+.universe-orb:hover {
+  border-color: var(--accent-dim);
+  transform: scale(1.06);
+}
+.universe-orb:hover::before { opacity: 0.8; }
+.universe-orb:active { transform: scale(0.97); }
+
+.universe-orb.active {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-glow), 0 0 24px var(--accent-glow);
+  animation: orbPulse 2.8s ease-in-out infinite;
+}
+
+@keyframes orbPulse {
+  0%, 100% { box-shadow: 0 0 0 3px var(--accent-glow), 0 0 20px var(--accent-glow); }
+  50%       { box-shadow: 0 0 0 6px rgba(124,154,126,0.08), 0 0 36px var(--accent-glow); }
+}
+
+.universe-orb.final-orb {
+  grid-column: span 1;
+  border-color: var(--accent-dim);
+}
+
+.orb-label {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.12em;
+  color: var(--text-faint);
+  text-align: center;
+  position: relative;
+  z-index: 1;
+  line-height: 1.5;
+  padding: 6px;
+  pointer-events: none;
+}
+
+.universe-orb.active .orb-label { color: var(--accent); }
+
+.universe-story {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px 22px;
+  margin-top: 6px;
+  display: none;
+  animation: storyFadeIn 0.4s ease forwards;
+  position: relative;
+  overflow: hidden;
+}
+
+.universe-story.open { display: block; }
+
+@keyframes storyFadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.universe-story::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, var(--accent-glow) 0%, transparent 55%);
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+.story-universe-id {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  color: var(--accent);
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.story-universe-id::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
+.story-scenario {
+  font-family: var(--font-body);
+  font-size: 16px;
+  color: var(--text-faint);
+  font-style: italic;
+  line-height: 1.65;
+  margin-bottom: 16px;
+}
+
+.story-verdict {
+  font-family: var(--font-body);
+  font-size: 19px;
+  color: var(--text);
+  line-height: 1.65;
+}
+
+.multiverse-closing {
+  margin-top: 36px;
+  font-family: var(--font-body);
+  font-size: 19px;
+  font-style: italic;
+  color: var(--text-dim);
+  line-height: 1.75;
+  text-align: center;
+  padding: 0 8px;
+}
+
+.multiverse-closing strong {
+  color: var(--text);
+  font-style: normal;
+  font-weight: 500;
+}
+
+.voice-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 28px;
+}
+
+.voice-item {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.voice-play {
+  width: 40px;
+  height: 40px;
+  min-width: 40px;
+  border-radius: 50%;
+  background: transparent;
+  border: 1px solid var(--accent-dim);
+  color: var(--accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.voice-play svg { width: 13px; height: 13px; }
+
+.voice-play.active {
+  background: var(--accent);
+  color: var(--bg);
+}
+
+.voice-info { flex: 1; min-width: 0; }
+
+.voice-id {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--accent);
+  letter-spacing: 0.08em;
+  margin-bottom: 3px;
+}
+
+.voice-caption {
+  color: var(--text-dim);
+  font-size: 15px;
+  font-style: italic;
+  margin-bottom: 8px;
+}
+
+.voice-progress-track {
+  height: 2px;
+  background: var(--border);
+  border-radius: 1px;
+  position: relative;
+  overflow: hidden;
+}
+
+.voice-progress-fill {
+  height: 100%;
+  width: 0%;
+  background: var(--accent);
+  transition: width 0.1s linear;
+}
+
+.voice-time {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--text-faint);
+  margin-top: 4px;
+}
+
+.intro-voice-item {
+  border-left: 2px solid var(--accent-dim);
+  padding-left: 14px;
+}
+
+.day-timeline {
+  margin-top: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 26px;
+}
+
+.day-moment {
+  display: grid;
+  grid-template-columns: 56px 1fr;
+  gap: 16px;
+  align-items: baseline;
+}
+
+.day-moment-time {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--accent);
+}
+
+.day-moment-text {
+  color: var(--text-dim);
+  font-style: italic;
+  font-size: 17px;
+}
+
+.day-moment-final .day-moment-text {
+  color: var(--text);
+  font-style: normal;
+}
+
+#finale {
+  min-height: 100vh;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 40px 24px;
+  background: var(--bg);
+}
+
+.finale-step {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  letter-spacing: 0.1em;
+  color: var(--text-faint);
+  opacity: 0;
+  margin-bottom: 18px;
+  transition: opacity 0.9s ease;
+}
+
+.finale-step.show { opacity: 1; }
+
+.finale-count {
+  font-family: var(--font-display);
+  font-size: clamp(30px, 8vw, 46px);
+  color: var(--text);
+  opacity: 0;
+  margin-bottom: 18px;
+  transition: opacity 0.9s ease;
+}
+
+.finale-count.show { opacity: 1; }
+
+.finale-reason {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-faint);
+  letter-spacing: 0.08em;
+  opacity: 0;
+  margin-top: 30px;
+  transition: opacity 0.9s ease;
+}
+.finale-reason.show { opacity: 1; }
+
+.finale-headline {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: clamp(24px, 6.5vw, 34px);
+  line-height: 1.35;
+  color: var(--accent);
+  max-width: 480px;
+  opacity: 0;
+  margin-top: 14px;
+  transition: opacity 1.1s ease;
+}
+.finale-headline.show { opacity: 1; }
+
+.final-message-wrap {
+  width: 100%;
+  max-width: 480px;
+  margin-top: 56px;
+  opacity: 0;
+  transition: opacity 1.2s ease;
+}
+.final-message-wrap.show { opacity: 1; }
+
+.final-message-box {
+  width: 100%;
+  min-height: 220px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  color: var(--text);
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-style: italic;
+  line-height: 1.6;
+  padding: 24px;
+  resize: vertical;
+}
+
+.final-message-box::placeholder { color: var(--text-faint); }
+
+.final-message-note {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--text-faint);
+  margin-top: 10px;
+  letter-spacing: 0.04em;
+  transition: color 0.3s ease;
+}
+
+.final-message-note.saved { color: var(--accent); }
+
+#call-screen {
+  min-height: 100vh;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 40px 24px;
+  gap: 20px;
+}
+
+.call-line {
+  font-family: var(--font-display);
+  font-size: clamp(20px, 5.5vw, 28px);
+  color: var(--text-dim);
+  opacity: 0;
+  transition: opacity 1s ease;
+  max-width: 420px;
+}
+
+.call-line.show { opacity: 1; }
+
+.call-line--final {
+  font-family: var(--font-mono);
+  font-size: clamp(22px, 6vw, 30px);
+  letter-spacing: 0.05em;
+  color: var(--text);
+  margin-top: 8px;
+}
+
+.btn-call {
+  margin-top: 30px;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  letter-spacing: 0.15em;
+  color: var(--accent);
+  background: transparent;
+  border: 1px solid var(--accent-dim);
+  padding: 16px 40px;
+  border-radius: var(--radius);
+  opacity: 0;
+  transition: opacity 1s ease, background 0.25s ease, color 0.25s ease;
+  min-height: 48px;
+}
+
+.btn-call.show { opacity: 1; }
+.btn-call:active { transform: scale(0.97); }
+.btn-call.answered {
+  background: var(--accent);
+  color: var(--bg);
+}
+
+.call-final-note {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--text-faint);
+  opacity: 0;
+  transition: opacity 0.8s ease;
+  margin-top: 6px;
+}
+.call-final-note.show { opacity: 1; }
+
+.egg-toast {
+  position: fixed;
+  left: 50%;
+  bottom: calc(84px + var(--safe-bottom));
+  transform: translate(-50%, 12px);
+  background: var(--bg-raised);
+  border: 1px solid var(--accent-dim);
+  color: var(--accent);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.05em;
+  padding: 12px 18px;
+  border-radius: var(--radius);
+  z-index: 900;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  max-width: 86vw;
+  text-align: center;
+}
+
+.egg-toast.show {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
+.footer-mark {
+  text-align: center;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--text-faint);
+  letter-spacing: 0.1em;
+  padding: 40px 24px calc(40px + var(--safe-bottom));
+}
+
+</style>
+</head>
+<body>
+
+<a href="#archive" class="skip-link">Skip to archive</a>
+<div class="grain" aria-hidden="true"></div>
+<div id="progress-bar" aria-hidden="true"></div>
+
+<section id="intro">
+  <p class="intro-status">STATUS: ONLINE. STILL US.</p>
+  <p class="intro-title" id="intro-title-trigger" tabindex="0">ARCHIVE 500</p>
+  <h1 class="intro-names">WAI YAN <span aria-hidden="true">×</span> JESSI</h1>
+  <p class="intro-range">DAY 001 — DAY 500 · ACROSS THE DISTANCE</p>
+  <p class="intro-line2">initializing archive<span class="cursor" aria-hidden="true"></span></p>
+  <button class="btn-open" id="open-archive-btn">OPEN ARCHIVE</button>
+  <p class="intro-scroll-hint">scroll · or tap open</p>
+</section>
+
+<div id="archive">
+
+  <section class="section section--tight reveal" id="intro-voice-section">
+    <p class="file-label">FILE 000</p>
+    <p class="eyebrow">BEFORE YOU BEGIN</p>
+    <div class="voice-item intro-voice-item">
+      <button class="voice-play" id="intro-voice-play" aria-label="Play opening note">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+      </button>
+      <div class="voice-info">
+        <p class="voice-id">OPENING NOTE</p>
+        <p class="voice-caption">A few words before the archive starts.</p>
+        <div class="voice-progress-track" id="intro-voice-track"><div class="voice-progress-fill" id="intro-voice-fill"></div></div>
+        <p class="voice-time" id="intro-voice-time">0:00 / 0:00</p>
+      </div>
+      <audio id="intro-voice-audio" preload="none" src="audio/opening-note.mp3"></audio>
+    </div>
+  </section>
+
+  <p class="archive-stats" id="archive-stats" aria-live="polite"></p>
+
+  <section class="section" id="file-001">
+    <div class="reveal">
+      <p class="file-label">FILE 001</p>
+      <p class="eyebrow">SIGNAL LOST</p>
+      <h2 class="section-title">Across every frequency. Still you.</h2>
+      <p class="section-body">500 days of love. Drag the dial to pick up what each moments meant.</p>
+    </div>
+
+    <div class="radio-wrap reveal" id="radio-wrap">
+      <div class="radio-unit">
+
+        <div class="radio-topbar">
+          <span class="radio-brand" id="radio-brand-trigger">ARCHIVE-500 · RECEIVER</span>
+          <span class="radio-status-dot" id="radio-dot"></span>
+        </div>
+
+        <div class="radio-display">
+          <div class="radio-freq-row">
+            <span class="radio-freq-num" id="radio-freq">88.0</span>
+            <span class="radio-freq-unit">MHz</span>
+          </div>
+          <div class="radio-wave" id="radio-wave">
+            <div class="radio-wave-bar"></div>
+            <div class="radio-wave-bar"></div>
+            <div class="radio-wave-bar"></div>
+            <div class="radio-wave-bar"></div>
+            <div class="radio-wave-bar"></div>
+            <div class="radio-wave-bar"></div>
+            <div class="radio-wave-bar"></div>
+            <div class="radio-wave-bar"></div>
+            <div class="radio-wave-bar"></div>
+            <div class="radio-wave-bar"></div>
+            <div class="radio-wave-bar"></div>
+            <div class="radio-wave-bar"></div>
+            <div class="radio-wave-bar"></div>
+            <div class="radio-wave-bar"></div>
+            <div class="radio-wave-bar"></div>
+          </div>
+        </div>
+
+        <div class="radio-dial-wrap">
+          <p class="radio-dial-label">TUNE FREQUENCY</p>
+          <input type="range" class="radio-dial" id="radio-dial" min="0" max="100" value="0" aria-label="Frequency dial">
+          <div class="radio-ticks" id="radio-ticks"></div>
+        </div>
+
+        <div class="radio-screen">
+          <p class="radio-screen-label">INCOMING TRANSMISSION</p>
+          <p class="radio-signal-text static" id="radio-signal">— searching for signal —</p>
+        </div>
+
+        <button class="radio-scan-btn" id="radio-scan-btn">⟳ &nbsp;AUTO SCAN</button>
+
+      </div>
+    </div>
+  </section>
+
+  <div class="divider" style="max-width: 640px; margin-left:auto; margin-right:auto;"></div>
+
+  <section class="section" id="close-the-gap">
+    <div class="reveal">
+      <p class="file-label">FILE 002</p>
+      <p class="eyebrow">CLOSE THE GAP</p>
+      <h2 class="section-title">The distance loses this round.</h2>
+      <p class="section-body">Tap it as many times as you want. It always gets there.</p>
+    </div>
+
+    <div class="gap-wrap reveal">
+
+      <div class="gap-track">
+        <div class="gap-node gap-node-a">
+          <span class="gap-node-label">WAI YAN</span>
+        </div>
+        <div class="gap-path">
+          <div class="gap-path-line"></div>
+          <span class="gap-traveler" id="gap-traveler">♥</span>
+        </div>
+        <div class="gap-node gap-node-b">
+          <span class="gap-node-label">JESSI</span>
+        </div>
+      </div>
+
+      <button class="gap-send-btn" id="gap-send-btn" type="button">SEND ONE ACROSS</button>
+
+      <p class="gap-result" id="gap-result">However far apart, it still gets there.</p>
+
+    </div>
+  </section>
+
+  <div class="divider" style="max-width: 640px; margin-left:auto; margin-right:auto;"></div>
+
+  <section class="section" id="timeline-section">
+    <div class="reveal">
+      <p class="file-label">FILE 003</p>
+      <p class="eyebrow">US</p>
+      <h2 class="section-title">After 500 days</h2>
+      <p class="section-body">Things that'll never change.</p>
+    </div>
+
+    <div class="still-here-wrap reveal">
+      <div class="still-here-list" id="obs-list">
+
+        <div class="observation">
+          <p class="obs-index">001</p>
+          <p class="obs-text">I reach for my phone when something happens to see your text<em> before anyone else's.</em></p>
+        </div>
+
+        <div class="observation">
+          <p class="obs-index">002</p>
+          <p class="obs-text">It's true that I'm miles away from you but <em>my heart knows where home is.</em></p>
+        </div>
+
+        <div class="observation">
+          <p class="obs-index">003</p>
+          <p class="obs-text">The moment I hear your voice, your giggless, <em>my day lights up by a boundless force.</em></p>
+        </div>
+
+        <div class="observation">
+          <p class="obs-index">004</p>
+          <p class="obs-text">You're someone that I want to be know completely, <em> and it's all out of love.</em></p>
+        </div>
+
+        <div class="observation">
+          <p class="obs-index">005</p>
+          <p class="obs-text">Some days the distance is heavy. I don't pretend it isn't. And no matter whatever obstacles come our way, <em>you're everything to me and I can vow my life to you.</em></p>
+        </div>
+
+        <div class="observation">
+          <p class="obs-index">006</p>
+          <p class="obs-text">The only thing I'll need is you<em> staying </em> by my side.</p>
+        </div>
+
+        <div class="observation obs-final">
+          <p class="obs-index">500</p>
+          <p class="obs-text">I know I've said it countless times but<br>forever and to eternity,<br><em>I love you.</em></p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <div class="divider" style="max-width: 640px; margin-left:auto; margin-right:auto;"></div>
+
+  <section class="section" id="grid-section">
+    <div class="reveal">
+      <p class="file-label">FILE 004</p>
+      <p class="eyebrow">EVERY WORLD</p>
+      <h2 class="section-title">A thousand lifetimes. Still you.</h2>
+    </div>
+
+    <div class="multiverse-wrap reveal">
+
+      <p class="multiverse-preamble">
+        Some people believe love happens once. I don't. I think if there were a thousand lifetimes, a thousand worlds, a thousand versions of me, I'd spend every one of them looking for you. And somehow, no matter how lost I was, love would remember the way back home.
+      </p>
+
+      <div class="multiverse-orbs" id="multiverse-orbs">
+
+        <button class="universe-orb" data-universe="1"
+          style="--orb-color: rgba(124,154,126,0.22);">
+          <span class="orb-label">UNIVERSE<br>A·001</span>
+        </button>
+
+        <button class="universe-orb" data-universe="2"
+          style="--orb-color: rgba(100,130,180,0.22);">
+          <span class="orb-label">UNIVERSE<br>A·002</span>
+        </button>
+
+        <button class="universe-orb" data-universe="3"
+          style="--orb-color: rgba(160,110,180,0.22);">
+          <span class="orb-label">UNIVERSE<br>A·003</span>
+        </button>
+
+        <button class="universe-orb" data-universe="4"
+          style="--orb-color: rgba(180,140,80,0.22);">
+          <span class="orb-label">UNIVERSE<br>A·004</span>
+        </button>
+
+        <button class="universe-orb" data-universe="5"
+          style="--orb-color: rgba(80,170,160,0.22);">
+          <span class="orb-label">UNIVERSE<br>A·005</span>
+        </button>
+
+        <button class="universe-orb final-orb" data-universe="final"
+          style="--orb-color: rgba(124,154,126,0.35);">
+          <span class="orb-label">UNIVERSE<br>∞</span>
+        </button>
+
+      </div>
+
+      <div class="universe-story" id="universe-story">
+        <p class="story-universe-id" id="story-universe-id">UNIVERSE A·001</p>
+        <p class="story-scenario" id="story-scenario"></p>
+        <p class="story-verdict" id="story-verdict"></p>
+      </div>
+
+      <p class="multiverse-closing">
+        In every last one, a different life, a different world, a different version of the same lost me <br>
+        I'll say the same three words. I love you<br><br>
+        <strong>And they're always meant for you.</strong>
+      </p>
+
+    </div>
+
+  </section>
+
+  <div class="divider" style="max-width: 640px; margin-left:auto; margin-right:auto;"></div>
+
+  <section class="section" id="voice-section">
+    <div class="reveal">
+      <p class="file-label">FILE 005</p>
+      <p class="eyebrow">VOICE FILES</p>
+      <h2 class="section-title">Some things shouldn't be typed.</h2>
+      <p class="section-body">Somethings that I want you to give a listen. <code>/audio/</code>.</p>
+    </div>
+
+    <div class="voice-list reveal">
+      <div class="voice-item">
+        <button class="voice-play" aria-label="Play VOICE_01">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+        </button>
+        <div class="voice-info">
+          <p class="voice-id">VOICE_01</p>
+          <p class="voice-caption">Something I always want to say but was unable to express.</p>
+          <div class="voice-progress-track"><div class="voice-progress-fill"></div></div>
+          <p class="voice-time">0:00 / 0:00</p>
+        </div>
+        <audio preload="none" src="audio/voice-01.mp3"></audio>
+      </div>
+
+      <div class="voice-item">
+        <button class="voice-play" aria-label="Play VOICE_02">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+        </button>
+        <div class="voice-info">
+          <p class="voice-id">VOICE_02</p>
+          <p class="voice-caption">The things I think about when I'm doing anything.</p>
+          <div class="voice-progress-track"><div class="voice-progress-fill"></div></div>
+          <p class="voice-time">0:00 / 0:00</p>
+        </div>
+        <audio preload="none" src="audio/voice-02.mp3"></audio>
+      </div>
+
+      <div class="voice-item">
+        <button class="voice-play" aria-label="Play VOICE_03">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+        </button>
+        <div class="voice-info">
+          <p class="voice-id">VOICE_03</p>
+          <p class="voice-caption">The thing I appreciate most about how you love from far away.</p>
+          <div class="voice-progress-track"><div class="voice-progress-fill"></div></div>
+          <p class="voice-time">0:00 / 0:00</p>
+        </div>
+        <audio preload="none" src="audio/voice-03.mp3"></audio>
+      </div>
+
+      <div class="voice-item">
+        <button class="voice-play" aria-label="Play VOICE_04">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+        </button>
+        <div class="voice-info">
+          <p class="voice-id">VOICE_04</p>
+          <p class="voice-caption">What 500 days of this, the distance, the calls, the waiting, actually means to me.</p>
+          <div class="voice-progress-track"><div class="voice-progress-fill"></div></div>
+          <p class="voice-time">0:00 / 0:00</p>
+        </div>
+        <audio preload="none" src="audio/voice-04.mp3"></audio>
+      </div>
+
+      <div class="voice-item">
+        <button class="voice-play" aria-label="Play VOICE_05">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+        </button>
+        <div class="voice-info">
+          <p class="voice-id">VOICE_05</p>
+          <p class="voice-caption">You.</p>
+          <div class="voice-progress-track"><div class="voice-progress-fill"></div></div>
+          <p class="voice-time">0:00 / 0:00</p>
+        </div>
+        <audio preload="none" src="audio/voice-05.mp3"></audio>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider" style="max-width: 640px; margin-left:auto; margin-right:auto;"></div>
+
+  <section class="section" id="if-you-were-here">
+    <div class="reveal">
+      <p class="file-label">FILE 006</p>
+      <p class="eyebrow">IF YOU WERE HERE</p>
+      <h2 class="section-title">How our days would be when we'll finally be together.</h2>
+      <p class="section-body">No plans. No big day out. Just what it would feel like to have you in the ordinary parts.</p>
+    </div>
+
+    <div class="day-timeline reveal">
+      <div class="day-moment">
+        <p class="day-moment-time">morning</p>
+        <p class="day-moment-text">Waking up and not having to open an app to talk to you. You'd just be there. That alone would be enough to make it a good day.</p>
+      </div>
+      <div class="day-moment">
+        <p class="day-moment-time">sometime after</p>
+        <p class="day-moment-text">We're not doing anything in particular. Maybe food. Maybe just sitting somewhere. I'd be glad to just do anything with you.</p>
+      </div>
+      <div class="day-moment">
+        <p class="day-moment-time">midday</p>
+        <p class="day-moment-text">You tell me about some things you've been doing, maybe a new yaoi that you've read or anything that you've taken a liking to doing. I'd listen intently, hanging on every word.</p>
+      </div>
+      <div class="day-moment">
+        <p class="day-moment-time">afternoon</p>
+        <p class="day-moment-text">We're doing nothing, specifically. Existing in the same space. No call to hang up, no screen between us. Just the same room, same air, same feelings.</p>
+      </div>
+      <div class="day-moment">
+        <p class="day-moment-time">evening</p>
+        <p class="day-moment-text">It was an ordinary day. But I'd replay the whole thing if I could, every single unremarkable minute of it.</p>
+      </div>
+      <div class="day-moment day-moment-final">
+        <p class="day-moment-time">end of it</p>
+        <p class="day-moment-text">I think a lot about how it'll feel to finally be with you in the same space, and I'm grateful to be able to think about it.</p>
+      </div>
+    </div>
+  </section>
+
+</div><section id="finale">
+  <p class="finale-step">ARCHIVE COMPLETE</p>
+  <p class="finale-count" id="finale-count-trigger">500 / 500</p>
+  <p class="finale-reason">ALL MEMORIES HAVE BEEN ACCESSED.</p>
+  <p class="finale-reason">ONE FILE REMAINS.</p>
+  <p class="finale-step">FILE_500</p>
+  <p class="finale-reason">STATUS: UNABLE TO ARCHIVE</p>
+  <p class="finale-reason">REASON:</p>
+  <p class="finale-headline" id="finale-headline" data-full-text="SOME THINGS CAN'T BE STORED IN A FILE."></p>
+
+  <div class="final-message-wrap">
+    <label for="final-message" class="file-label" style="text-align:left; display:block; margin-bottom:10px;">If you could say anything to me right now, what would it be?</label>
+    <textarea id="final-message" class="final-message-box" placeholder="[WRITE HERE]"></textarea>
+    <p class="final-message-note" id="final-message-note">autosaves in this browser as you type</p>
+  </div>
+</section>
+
+<section id="call-screen">
+  <p class="call-line">500 DAYS COMPLETE.</p>
+  <p class="call-line">500 days of calls that always ended properly.</p>
+  <p class="call-line">Of loving someone through a screen and meaning every bit of it.</p>
+  <p class="call-line">Of distance that never once made it feel less real.</p>
+  <p class="call-line call-line--final">NOW OPEN THE CALL.</p>
+  <button class="btn-call" id="call-btn">CALL</button>
+  <p class="call-final-note" id="call-final-note">see you on the other side of the screen.</p>
+</section>
+
+<p class="footer-mark" id="footer-mark">ARCHIVE 500 · WAI YAN × JESSI</p>
+
+<div class="egg-toast" id="egg-toast"></div>
+
+<button id="music-toggle" aria-label="Toggle background music" aria-pressed="false">
+  <span class="music-note" aria-hidden="true">♫</span>
+  <span class="music-state" id="music-state">MUSIC: OFF</span>
+</button>
+
+<button id="back-to-top" aria-label="Back to top">↑ TOP</button>
+
+<audio id="bg-music" loop preload="none" src="audio/background.mp3"></audio>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  const progressBar = document.getElementById('progress-bar');
+  function updateProgress() {
+    const scrollTop = window.scrollY;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const pct = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+    progressBar.style.width = pct + '%';
+  }
+  window.addEventListener('scroll', updateProgress, { passive: true });
+  updateProgress();
+
+  const backToTop = document.getElementById('back-to-top');
+  function updateBackToTop() {
+    if (window.scrollY > window.innerHeight) {
+      backToTop.classList.add('visible');
+    } else {
+      backToTop.classList.remove('visible');
+    }
+  }
+  window.addEventListener('scroll', updateBackToTop, { passive: true });
+  updateBackToTop();
+
+  backToTop.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: prefersReducedMotion ? 'auto' : 'smooth' });
+  });
+
+  const openBtn = document.getElementById('open-archive-btn');
+  const archive = document.getElementById('archive');
+  const intro = document.getElementById('intro');
+
+  openBtn.addEventListener('click', () => {
+    archive.classList.add('revealed');
+    startAmbientMusicIntent();
+    setTimeout(() => {
+      archive.scrollIntoView({ behavior: prefersReducedMotion ? 'auto' : 'smooth' });
+    }, 150);
+  });
+
+  const revealEls = document.querySelectorAll('.reveal');
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+  revealEls.forEach(el => revealObserver.observe(el));
+
+  const signalData = [
+    { freq: '88.0', type: 'static',  text: '— — — ·· ···· ··· ·· ·— ·· — — —' },
+    { freq: '91.3', type: 'weak',    text: 'the call drops for a second and when it comes back you\'re mid laugh and i missed what was funny but it didn\'t matter because we were together.' },
+    { freq: '94.7', type: 'static',  text: '████ connection lost ████ reconnecting ████' },
+    { freq: '97.2', type: 'weak',    text: 'the way we manage to find each other in the noise.' },
+    { freq: '100.0', type: 'lock',   text: 'i could drift into eternity looking at you, and i mean it when i say that your beauty is that of a goddess.' },
+    { freq: '103.5', type: 'weak',   text: 'same feelings flow.' },
+    { freq: '106.8', type: 'static', text: '·-·· --- …- . / … - --- .-. . … / ···' },
+    { freq: '108.0', type: 'weak',   text: 'jessi puff.' },
+  ];
+
+  const dialEl      = document.getElementById('radio-dial');
+  const freqEl      = document.getElementById('radio-freq');
+  const signalEl    = document.getElementById('radio-signal');
+  const dotEl       = document.getElementById('radio-dot');
+  const radioWrap   = document.getElementById('radio-wrap');
+  const ticksEl     = document.getElementById('radio-ticks');
+  const scanBtn     = document.getElementById('radio-scan-btn');
+
+  if (dialEl) {
+    signalData.forEach(s => {
+      const tick = document.createElement('span');
+      tick.className = 'radio-tick';
+      tick.textContent = s.freq;
+      tick.dataset.freq = s.freq;
+      ticksEl.appendChild(tick);
+    });
+
+    const totalStations = signalData.length - 1;
+    let scanInterval = null;
+    let scanTarget = null;
+
+    function setStation(index) {
+      const clamped = Math.max(0, Math.min(signalData.length - 1, Math.round(index)));
+      const station = signalData[clamped];
+
+      freqEl.textContent = station.freq;
+
+      ticksEl.querySelectorAll('.radio-tick').forEach((t, i) => {
+        t.classList.toggle('active', i === clamped);
+      });
+
+      signalEl.className = 'radio-signal-text';
+      if (station.type === 'static') {
+        signalEl.classList.add('static');
+        dotEl.classList.remove('live');
+        radioWrap.classList.remove('tuned');
+      } else if (station.type === 'weak') {
+        dotEl.classList.remove('live');
+        radioWrap.classList.add('tuned');
+        signalEl.classList.add('weak');
+      } else if (station.type === 'lock') {
+        signalEl.classList.add('lock');
+        dotEl.classList.add('live');
+        radioWrap.classList.add('tuned');
+      }
+
+      signalEl.style.opacity = '0';
+      setTimeout(() => {
+        signalEl.textContent = station.text;
+        signalEl.style.opacity = '1';
+      }, prefersReducedMotion ? 0 : 180);
+    }
+
+    dialEl.addEventListener('input', () => {
+      stopScan();
+      const idx = (dialEl.value / 100) * totalStations;
+      setStation(idx);
+    });
+
+    function stopScan() {
+      if (scanInterval) { clearInterval(scanInterval); scanInterval = null; }
+      scanBtn.classList.remove('scanning');
+      scanBtn.textContent = '⟳ \u00a0AUTO SCAN';
+    }
+
+    function startScan() {
+      if (scanInterval) { stopScan(); return; }
+      scanBtn.classList.add('scanning');
+      scanBtn.textContent = '■ \u00a0SCANNING…';
+      let current = parseFloat(dialEl.value);
+      scanInterval = setInterval(() => {
+        current = (current + 2) % 101;
+        dialEl.value = current;
+        const idx = (current / 100) * totalStations;
+        setStation(idx);
+        if (Math.round(idx) === totalStations) { stopScan(); }
+      }, prefersReducedMotion ? 50 : 120);
+    }
+
+    scanBtn.addEventListener('click', () => {
+      if (scanInterval) { stopScan(); } else { dialEl.value = 0; startScan(); }
+    });
+
+    setStation(0);
+  }
+
+  const gapMessages = [
+    'However far apart, it still gets there.',
+    'Distance: currently losing.',
+    'Sent instantly. No passport required.',
+    'One more reason time zones don\u2019t matter.',
+    'Delivered before you finished reading this.',
+    'The gap, closed again.',
+  ];
+
+  const gapTraveler = document.getElementById('gap-traveler');
+  const gapSendBtn = document.getElementById('gap-send-btn');
+  const gapResult = document.getElementById('gap-result');
+  const gapNodeA = document.querySelector('.gap-node-a');
+  const gapNodeB = document.querySelector('.gap-node-b');
+
+  if (gapTraveler && gapSendBtn) {
+    let sending = false;
+
+    gapTraveler.addEventListener('transitionend', (e) => {
+      if (e.propertyName !== 'left') return;
+      gapNodeA.classList.add('pulse');
+      gapNodeB.classList.add('pulse');
+      setTimeout(() => {
+        gapNodeA.classList.remove('pulse');
+        gapNodeB.classList.remove('pulse');
+      }, 700);
+
+      gapResult.textContent = gapMessages[Math.floor(Math.random() * gapMessages.length)];
+      gapResult.classList.remove('show');
+      void gapResult.offsetWidth;
+      gapResult.classList.add('show');
+
+      gapSendBtn.disabled = false;
+      sending = false;
+    });
+
+    gapSendBtn.addEventListener('click', () => {
+      if (sending) return;
+      sending = true;
+      gapSendBtn.disabled = true;
+
+      gapTraveler.style.transition = 'none';
+      gapTraveler.classList.remove('sent');
+      void gapTraveler.offsetWidth;
+      gapTraveler.style.transition = '';
+      requestAnimationFrame(() => gapTraveler.classList.add('sent'));
+    });
+  }
+
+  const archiveStatsEl = document.getElementById('archive-stats');
+  if (archiveStatsEl) {
+    const gapMessageCount = gapMessages.length;
+    const voiceCount = document.querySelectorAll('.voice-list .voice-item').length;
+    const pad3 = (n) => String(n).padStart(3, '0');
+    archiveStatsEl.textContent =
+      pad3(gapMessageCount) + ' WAYS TO CLOSE THE GAP  ·  ' +
+      pad3(voiceCount) + ' VOICE FILES';
+  }
+
+  const bgMusic = document.getElementById('bg-music');
+  const musicToggle = document.getElementById('music-toggle');
+  const musicState = document.getElementById('music-state');
+
+  const MUSIC_VOLUME = 0.055;
+  let musicIntentGiven = false;
+  let musicEnabled = false;
+  let musicFadeTimer = null;
+  let currentlyPlaying = null;
+
+  function clearMusicFade() {
+    if (musicFadeTimer) {
+      clearInterval(musicFadeTimer);
+      musicFadeTimer = null;
+    }
+  }
+
+  function setMusicLabel(isOn) {
+    musicState.textContent = isOn ? 'MUSIC: ON' : 'MUSIC: OFF';
+    musicToggle.setAttribute('aria-pressed', isOn ? 'true' : 'false');
+  }
+
+  function fadeMusicTo(targetVolume, duration = 700, onComplete) {
+    if (!bgMusic) return;
+    clearMusicFade();
+
+    const startVolume = bgMusic.volume || 0;
+    const steps = Math.max(1, Math.round(duration / 30));
+    const stepAmount = (targetVolume - startVolume) / steps;
+    let step = 0;
+
+    musicFadeTimer = setInterval(() => {
+      step++;
+      const nextVolume = startVolume + stepAmount * step;
+      bgMusic.volume = Math.max(0, Math.min(1, nextVolume));
+
+      if (step >= steps) {
+        bgMusic.volume = targetVolume;
+        clearMusicFade();
+        if (typeof onComplete === 'function') onComplete();
+      }
+    }, 30);
+  }
+
+  function fadeInMusic() {
+    if (!bgMusic || !musicEnabled) return;
+
+    bgMusic.play().then(() => {
+      musicToggle.classList.add('playing');
+      setMusicLabel(true);
+      fadeMusicTo(MUSIC_VOLUME, 1500);
+    }).catch(() => {
+      musicEnabled = false;
+      musicToggle.classList.remove('playing');
+      setMusicLabel(false);
+    });
+  }
+
+  function fadeOutAndPauseMusic() {
+    if (!bgMusic || bgMusic.paused) return;
+
+    fadeMusicTo(0, 500, () => {
+      bgMusic.pause();
+    });
+  }
+
+  function startAmbientMusicIntent() {
+    if (musicIntentGiven) return;
+    musicIntentGiven = true;
+    musicEnabled = true;
+    bgMusic.volume = 0;
+    fadeInMusic();
+  }
+
+  musicToggle.addEventListener('click', () => {
+    if (musicEnabled) {
+      musicEnabled = false;
+      fadeMusicTo(0, 350, () => {
+        bgMusic.pause();
+        musicToggle.classList.remove('playing');
+        setMusicLabel(false);
+      });
+    } else {
+      musicIntentGiven = true;
+      musicEnabled = true;
+      bgMusic.volume = 0;
+      fadeInMusic();
+    }
+  });
+
+  function pauseOtherVoiceNotes(exceptAudio) {
+    document.querySelectorAll('.voice-item audio').forEach(otherAudio => {
+      if (otherAudio !== exceptAudio && !otherAudio.paused) {
+        otherAudio.pause();
+      }
+    });
+  }
+
+  function resumeAmbientAfterVoice(audio) {
+    if (currentlyPlaying === audio) currentlyPlaying = null;
+
+    const anotherVoiceIsPlaying = Array.from(document.querySelectorAll('.voice-item audio'))
+      .some(otherAudio => otherAudio !== audio && !otherAudio.paused);
+
+    if (!anotherVoiceIsPlaying && musicEnabled) {
+      fadeInMusic();
+    }
+  }
+
+  const voiceItems = document.querySelectorAll('.voice-item');
+
+  voiceItems.forEach(item => {
+    const audio = item.querySelector('audio');
+    const playBtn = item.querySelector('.voice-play');
+    const fill = item.querySelector('.voice-progress-fill');
+    const timeLabel = item.querySelector('.voice-time');
+    const track = item.querySelector('.voice-progress-track');
+
+    playBtn.addEventListener('click', () => {
+      if (audio.paused) {
+        pauseOtherVoiceNotes(audio);
+
+        audio.play().then(() => {
+          currentlyPlaying = audio;
+          playBtn.classList.add('active');
+          if (musicEnabled) fadeOutAndPauseMusic();
+        }).catch(() => {
+          flashEgg('Audio file not found — add your file to /audio/');
+        });
+      } else {
+        audio.pause();
+      }
+    });
+
+    audio.addEventListener('play', () => {
+      currentlyPlaying = audio;
+      playBtn.classList.add('active');
+      if (musicEnabled) fadeOutAndPauseMusic();
+    });
+
+    audio.addEventListener('pause', () => {
+      playBtn.classList.remove('active');
+      resumeAmbientAfterVoice(audio);
+    });
+
+    audio.addEventListener('timeupdate', () => {
+      if (audio.duration) {
+        fill.style.width = (audio.currentTime / audio.duration) * 100 + '%';
+        timeLabel.textContent = formatTime(audio.currentTime) + ' / ' + formatTime(audio.duration);
+      }
+    });
+
+    audio.addEventListener('ended', () => {
+      playBtn.classList.remove('active');
+      fill.style.width = '0%';
+      resumeAmbientAfterVoice(audio);
+    });
+
+    track.addEventListener('click', (e) => {
+      if (!audio.duration) return;
+      const rect = track.getBoundingClientRect();
+      const pct = (e.clientX - rect.left) / rect.width;
+      audio.currentTime = pct * audio.duration;
+    });
+  });
+
+  function formatTime(sec) {
+    if (isNaN(sec)) return '0:00';
+    const m = Math.floor(sec / 60);
+    const s = Math.floor(sec % 60).toString().padStart(2, '0');
+    return m + ':' + s;
+  }
+
+  const finaleSection = document.getElementById('finale');
+  const finaleSteps = document.querySelectorAll('.finale-step, .finale-count, .finale-reason, .finale-headline, .final-message-wrap');
+  let finalePlayed = false;
+
+  const finaleObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting && !finalePlayed) {
+        finalePlayed = true;
+        playFinaleSequence();
+        finaleObserver.disconnect();
+      }
+    });
+  }, { threshold: 0.4 });
+  finaleObserver.observe(finaleSection);
+
+  function playFinaleSequence() {
+    const delay = prefersReducedMotion ? 0 : 700;
+    finaleSteps.forEach((el, i) => {
+      setTimeout(() => {
+        el.classList.add('show');
+        if (el.id === 'finale-headline') {
+          typewriteHeadline(el);
+        }
+      }, i * delay);
+    });
+  }
+
+  function typewriteHeadline(el) {
+    const fullText = el.dataset.fullText || '';
+    if (prefersReducedMotion || !fullText) {
+      el.textContent = fullText;
+      return;
+    }
+    let i = 0;
+    el.textContent = '';
+    const typeSpeed = 45;
+    const type = () => {
+      if (i <= fullText.length) {
+        el.textContent = fullText.slice(0, i);
+        i++;
+        setTimeout(type, typeSpeed);
+      }
+    };
+    type();
+  }
+
+  const finalMessageBox = document.getElementById('final-message');
+  const finalMessageNote = document.getElementById('final-message-note');
+  const FINAL_MESSAGE_KEY = 'archive500-final-message-draft';
+
+  if (finalMessageBox) {
+    try {
+      const saved = localStorage.getItem(FINAL_MESSAGE_KEY);
+      if (saved) finalMessageBox.value = saved;
+    } catch (err) {
+    }
+
+    let saveTimer = null;
+    finalMessageBox.addEventListener('input', () => {
+      clearTimeout(saveTimer);
+      saveTimer = setTimeout(() => {
+        try {
+          localStorage.setItem(FINAL_MESSAGE_KEY, finalMessageBox.value);
+          if (finalMessageNote) {
+            finalMessageNote.textContent = 'saved in this browser';
+            finalMessageNote.classList.add('saved');
+            setTimeout(() => finalMessageNote.classList.remove('saved'), 1200);
+          }
+        } catch (err) {
+        }
+      }, 500);
+    });
+  }
+
+  const callScreen = document.getElementById('call-screen');
+  const callLines = document.querySelectorAll('.call-line, .btn-call');
+  let callPlayed = false;
+
+  const callObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting && !callPlayed) {
+        callPlayed = true;
+        const delay = prefersReducedMotion ? 0 : 900;
+        callLines.forEach((el, i) => {
+          setTimeout(() => el.classList.add('show'), i * delay);
+        });
+        callObserver.disconnect();
+      }
+    });
+  }, { threshold: 0.4 });
+  callObserver.observe(callScreen);
+
+  const callBtn = document.getElementById('call-btn');
+  const callNote = document.getElementById('call-final-note');
+  callBtn.addEventListener('click', () => {
+    callBtn.classList.add('answered');
+    callBtn.textContent = 'CONNECTING…';
+    setTimeout(() => {
+      callBtn.textContent = 'SEE YOU ON THE CALL.';
+      callNote.classList.add('show');
+    }, 900);
+  });
+
+  const eggToast = document.getElementById('egg-toast');
+  let eggTimer = null;
+
+  function flashEgg(message) {
+    eggToast.textContent = message;
+    eggToast.classList.add('show');
+    clearTimeout(eggTimer);
+    eggTimer = setTimeout(() => eggToast.classList.remove('show'), 3200);
+  }
+
+  const introTitle = document.getElementById('intro-title-trigger');
+  if (introTitle) {
+    introTitle.addEventListener('click', () => {
+      flashEgg('some things were never meant to be filed.');
+    });
+  }
+
+  let keyBuffer = '';
+  window.addEventListener('keydown', (e) => {
+    if (e.key.length === 1) {
+      keyBuffer = (keyBuffer + e.key.toLowerCase()).slice(-5);
+      if (keyBuffer.endsWith('us')) {
+        flashEgg('STATUS: STILL US.');
+        keyBuffer = '';
+      } else if (keyBuffer === 'pizza') {
+        flashEgg('pineapple belongs on pizza. this is the hill i die on.');
+        keyBuffer = '';
+      }
+    }
+  });
+
+  const footerMark = document.getElementById('footer-mark');
+  if (footerMark) {
+    let pressTimer = null;
+    const startPress = () => {
+      pressTimer = setTimeout(() => flashEgg('archived with care. day 501 is unwritten.'), 800);
+    };
+    const cancelPress = () => clearTimeout(pressTimer);
+    footerMark.addEventListener('mousedown', startPress);
+    footerMark.addEventListener('touchstart', startPress, { passive: true });
+    ['mouseup', 'mouseleave', 'touchend'].forEach(evt =>
+      footerMark.addEventListener(evt, cancelPress)
+    );
+  }
+
+  const konamiSequence = ['arrowup','arrowup','arrowdown','arrowdown','arrowleft','arrowright','arrowleft','arrowright','b','a'];
+  let konamiProgress = [];
+  window.addEventListener('keydown', (e) => {
+    const key = e.key.toLowerCase();
+    konamiProgress.push(key);
+    konamiProgress = konamiProgress.slice(-konamiSequence.length);
+    if (konamiProgress.join(',') === konamiSequence.join(',')) {
+      flashEgg('CODE ACCEPTED. +500 LOYALTY POINTS.');
+      konamiProgress = [];
+    }
+  });
+
+  function makeRapidClickEgg(id, requiredClicks, windowMs, message) {
+    const el = document.getElementById(id);
+    if (!el) return;
+    let clicks = 0;
+    let resetTimer = null;
+    el.addEventListener('click', () => {
+      clicks++;
+      clearTimeout(resetTimer);
+      resetTimer = setTimeout(() => { clicks = 0; }, windowMs);
+      if (clicks >= requiredClicks) {
+        flashEgg(message);
+        clicks = 0;
+      }
+    });
+  }
+
+  makeRapidClickEgg('finale-count-trigger', 3, 1500, 'okay okay, we get it. 500 days.');
+  makeRapidClickEgg('radio-brand-trigger', 3, 1500, 'frequency locked. you are not going anywhere.');
+
+  console.log('%cyou opened the console. of course you did.', 'color:#7c9a7e; font-family:monospace; font-size:13px;');
+  console.log('%cthere is nothing to debug here. just 500 days, still counting.', 'color:#9a9689; font-family:monospace; font-size:12px;');
+
+  window.addEventListener('contextmenu', () => {
+    flashEgg('nice try. this archive is not for sale. (here is a virtual cookie though) 🍪');
+  });
+
+  let mashKey = '';
+  let mashCount = 0;
+  let mashTimer = null;
+  window.addEventListener('keydown', (e) => {
+    if (e.key.length !== 1) return;
+    if (e.key === mashKey) {
+      mashCount++;
+    } else {
+      mashKey = e.key;
+      mashCount = 1;
+    }
+    clearTimeout(mashTimer);
+    mashTimer = setTimeout(() => { mashCount = 0; }, 600);
+    if (mashCount >= 6) {
+      flashEgg('keyboard smash acknowledged. mood received.');
+      mashCount = 0;
+    }
+  });
+
+  let idleTimer = null;
+  const resetIdleTimer = () => {
+    clearTimeout(idleTimer);
+    idleTimer = setTimeout(() => {
+      flashEgg('still there? i was not worried. okay, maybe a little.');
+    }, 60000);
+  };
+  ['mousemove', 'keydown', 'scroll', 'touchstart'].forEach(evt =>
+    window.addEventListener(evt, resetIdleTimer, { passive: true })
+  );
+  resetIdleTimer();
+
+  document.addEventListener('visibilitychange', () => {
+    if (document.visibilityState === 'visible') {
+      flashEgg('oh, you are back. not that i was counting the seconds.');
+    }
+  });
+
+  const obsList = document.getElementById('obs-list');
+  if (obsList) {
+    const obsItems = obsList.querySelectorAll('.observation');
+    const obsObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in-view');
+          obsObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+    obsItems.forEach((el, i) => {
+      el.style.transitionDelay = prefersReducedMotion ? '0ms' : `${i * 80}ms`;
+      obsObserver.observe(el);
+    });
+  }
+
+  const universeData = {
+    '1': {
+      id: 'UNIVERSE A·001 / TRANSMISSION RECOVERED',
+       scenario: 'We meet at a completely different time. Different year, different place, different versions of ourselves. Somehow, our paths still cross.',
+      verdict: 'I\'d still find you. Maybe not in the same way, but somehow, always.'
+    },
+    '2': {
+      id: 'UNIVERSE A·002 / TRANSMISSION RECOVERED',
+      scenario: 'In this one, the interent wasn\'t as advanced as it is now, communication especially through long distances, it was regarded impossible. We never find each other through a screen.',
+      verdict: 'I\'d still find you. If the internet disappears then I\'ll find another way.'
+    },
+    '3': {
+      id: 'UNIVERSE A·003 / TRANSMISSION RECOVERED',
+      scenario: 'In this one, We live even further apart and the timezones are brutal. Maybe our clocks never agree and our days barely overlap.',
+      verdict: 'I still find you. We make the hours work. We always find the window. And distance can only change the map, not where I look.'
+    },
+    '4': {
+      id: 'UNIVERSE A·004 / TRANSMISSION RECOVERED',
+    scenario: 'We\'re still us, but not quite. Different interests. Different personalities. Different dreams. Almost everything about us changes except the feeling that is something similar.',
+      verdict: 'I\'d still find you. I would recognize something in you before I even knew what it was.'
+    },
+    '5': {
+      id: 'UNIVERSE A·005 / TRANSMISSION RECOVERED',
+       scenario: 'In this one, I convince myself that online isn\'t real. That screens don\'t count. That love needs to be in the same room to be valid.',
+      verdict: 'I still find you. And you prove me wrong without even trying.'
+    },
+    'final': {
+      id: 'UNIVERSE ∞ / THIS ONE',
+       scenario: '',
+      verdict: 'Out of every possible version of our story this is the one that happened. And after 500 days, I hope I\'ll continue to have the honour to call you mine.'
+    },
+  };
+
+  const orbsContainer = document.getElementById('multiverse-orbs');
+  const storyPanel = document.getElementById('universe-story');
+  const storyIdEl = document.getElementById('story-universe-id');
+  const storyScenarioEl = document.getElementById('story-scenario');
+  const storyVerdictEl = document.getElementById('story-verdict');
+  let activeOrb = null;
+
+  if (orbsContainer && storyPanel) {
+    orbsContainer.querySelectorAll('.universe-orb').forEach(orb => {
+      orb.addEventListener('click', () => {
+        const key = orb.dataset.universe;
+        const data = universeData[key];
+        if (!data) return;
+
+        if (activeOrb === orb) {
+          orb.classList.remove('active');
+          storyPanel.classList.remove('open');
+          activeOrb = null;
+          return;
+        }
+
+        if (activeOrb) activeOrb.classList.remove('active');
+        orb.classList.add('active');
+        activeOrb = orb;
+
+        storyIdEl.textContent = data.id;
+        storyScenarioEl.textContent = data.scenario;
+        storyScenarioEl.style.display = data.scenario ? 'block' : 'none';
+        storyVerdictEl.textContent = data.verdict;
+
+        storyPanel.classList.remove('open');
+        void storyPanel.offsetWidth;
+        storyPanel.classList.add('open');
+
+        setTimeout(() => {
+          storyPanel.scrollIntoView({ behavior: prefersReducedMotion ? 'auto' : 'smooth', block: 'nearest' });
+        }, 80);
+      });
+    });
+  }
+
+});
+
+</script>
+</body>
+</html>
